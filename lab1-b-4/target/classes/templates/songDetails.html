@@ -1,0 +1,67 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Song Details</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0 auto;
+        max-width: 800px;
+        background-color: #f9f9f9;
+        color: #333;
+        padding: 20px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #444;
+    }
+
+    section {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    ul li {
+        font-size: 16px;
+        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+   <h1 th:text="${song.getTitle()}"></h1>
+
+</header>
+<section>
+    <h2 th:text="${song.getGenre()}"></h2>
+    <h2 th:text="${song.getReleaseYear()}">Year</h2>
+    <h2>Performers:</h2>
+    <ul th:each="artist : ${song.getPerformers()}">
+        <li th:text="${artist.getName()}"></li>
+    </ul>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add/Edit Song</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+      margin: 20px 0;
+      font-size: 24px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    a {
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+  </style>
+</head>
+<body>
+<h1 th:text="${song.id == null} ? 'Add New Song' : 'Edit Song'"></h1>
+<form th:action="${song.id == null} ? '/songs/add' : '/songs/edit/' + ${song.id}" th:object="${song}" method="post">
+  <input type="hidden" th:field="*{id}" />
+  <div>
+    <label for="title">Title:</label>
+    <input type="text" id="title" th:field="*{title}" required />
+  </div>
+  <div>
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" th:field="*{genre}" required />
+  </div>
+  <div>
+    <label for="trackId">Track ID:</label>
+    <input type="text" id="trackId" th:field="*{trackId}" required />
+  </div>
+  <div>
+    <label for="releaseYear">Release Year:</label>
+    <input type="number" id="releaseYear" th:field="*{releaseYear}" required />
+  </div>
+  <div>
+    <label for="album">Album:</label>
+    <select id="album"  name="albumId" required>
+      <option th:each="album : ${albums}"
+              th:value="${album.getId()}"
+              th:text="${album.name}">
+      </option>
+    </select>
+  </div>
+  <div>
+    <button type="submit" th:text="${song.id == null} ? 'Add Song' : 'Update Song'"></button>
+    <a href="/songs">Cancel</a>
+  </div>
+</form>
+
+</body>
+</html>

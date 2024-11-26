@@ -1,0 +1,105 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Add new Performer to Song</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            color: #444;
+        }
+
+        h1, h2 {
+            font-size: 20px;
+            margin: 15px 0;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 0 4px 6px;
+            margin-top: 20px;
+        }
+        form div {
+            margin: 10px 0;
+        }
+
+        label {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        aside {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <h1>Select the Artist to add to the List of Performers </h1>
+</header>
+<section>
+    <h2>Select artist:</h2>
+    <form action="/trackDetails" method="post">
+        <div th:each="artist : ${artists}">
+            <input type="radio" name="artistId" th:value="${artist.getId()}">
+            <label th:text="${artist.getName()}"></label>
+            <br/>
+        </div>
+        <input type='submit' value='Add artist'>
+    </form>
+</section>
+<aside>
+    <table>
+        <tr>
+            <!-- change to show selected trackId -->
+            <td><b>Track Id</b></td>
+            <td th:text="${trackId}"></td>
+        </tr>
+    </table>
+</aside>
+</body>
+</html>
